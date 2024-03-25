@@ -50,7 +50,7 @@ public class MyCalculator {
                         System.out.println("ATENCIÓ!!! \nHa de ser un valor entre 0 i 3");
                 }
 
-            } catch (NumberFormatException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }catch (InputMismatchException e2){
                 System.out.println(e2);
@@ -70,10 +70,11 @@ public class MyCalculator {
             System.out.print((int) Math.pow(n,p));
         }else {
             if (n < 0 || p < 0) {
-                throw new NumberFormatException("Ni n ni p poden ser negatius");
+                throw new IllegalArgumentException("Ni n ni p poden ser negatius");
             } else if (n == 0 || p == 0) {
-                throw new NumberFormatException("Ni n ni p poden ser 0");
+                throw new IllegalArgumentException("Ni n ni p poden ser 0");
             }
+
         }
 
     }
