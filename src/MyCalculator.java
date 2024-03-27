@@ -1,5 +1,3 @@
-import megaLibreria.utilities;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,6 +5,8 @@ public class MyCalculator {
 
     public static void main(final String[] args) throws InterruptedException {
         Scanner scan = new Scanner(System.in);
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_PURPLE= "\u001B[35m";
         int opcio;
         do {
             System.out.println("1. Ennessima potencia d'un nombre");
@@ -41,7 +41,18 @@ public class MyCalculator {
 
                         break;
                     case 3:
+                        int a;
+                        int b;
+                        int c;
 
+                        System.out.println(ANSI_PURPLE+ "Format: ax²+bx+c=0"+ANSI_RESET);
+                        System.out.print("Introdueix la a: ");
+                        a= scan.nextInt();
+                        System.out.print("Introdueix la b: ");
+                        b= scan.nextInt();
+                        System.out.print("Introdueix la c: ");
+                        c= scan.nextInt();
+                        calculsegonGrau(a,b,c);
                         break;
                     case 0:
 
@@ -58,6 +69,7 @@ public class MyCalculator {
             }catch (ArithmeticException e3){
                 System.out.println(e3);
             }
+
             System.out.println();
             Thread.sleep(700);
         } while (opcio != 0);
@@ -80,6 +92,35 @@ public class MyCalculator {
     }
     public static void divisio(int x,int y){
         System.out.println(x/y);
+    }
+
+    public  static void calculsegonGrau(int a, int b, int c){
+        double D=  Math.pow(b, 2) - 4 * a * c;
+        double x1 = 0;
+        double x2 = 0;
+        String excepcion=String.format("El discriminant no pot ser negatiu\n%d²-4*%d*%d= %.1f",b,a,c,D);
+
+
+        if (a==0){
+            throw new IllegalArgumentException("a no pot ser 0");
+        }
+
+        if (D>0){
+            x1 = (-b + Math.sqrt(D)) / (2 * a);
+            x2 = (-b - Math.sqrt(D)) / (2 * a);
+
+            System.out.printf("x1= %f\nx2= %f",x1,x2);
+
+        } else if (D==0) {
+            x1= (double) -b /(2*a);
+
+            System.out.printf("x1= %f",x1);
+
+        } else if (D<0) {
+            throw new IllegalArgumentException(excepcion);
+        }
+
+
     }
 }
 
